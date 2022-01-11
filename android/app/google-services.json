@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "339678903430",
+    "project_id": "pedido-2d833",
+    "storage_bucket": "pedido-2d833.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339678903430:android:e844543f447aba95aaa507",
+        "android_client_info": {
+          "package_name": "com.example.pedido"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339678903430-0ofvl862be8pn43q2c3hs1fbkk274h2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pedido",
+            "certificate_hash": "0b988e4397a74ff12c40df49897855ab8c6a33fc"
+          }
+        },
+        {
+          "client_id": "339678903430-96i6uecce177ra7i30f19mipg4gmfrq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXsl7wobU_wtJo2eH3IJMLLGCxgdb2vwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339678903430-96i6uecce177ra7i30f19mipg4gmfrq0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
