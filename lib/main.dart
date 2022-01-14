@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pedido/screens/forms/signup_page.dart';
 import 'screens/home_page.dart';
 import 'helpers/init_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,8 +17,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
-      initialBinding: initDept(),
+      initialBinding: InitDept(),
       theme: ThemeData(
+        fontFamily: "Playfair",
         primarySwatch: Colors.grey,
       ),
       debugShowCheckedModeBanner: false,

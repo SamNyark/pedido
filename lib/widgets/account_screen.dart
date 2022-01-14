@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
-import 'package:pedido/helpers/init_controller.dart';
 import 'package:pedido/screens/forms/signup_page.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  AccountScreen({Key? key}) : super(key: key);
+  FirebaseForm formController = Get.find();
+
 
   Widget detector({icons, name, Function? onTapGesture}) {
     return GestureDetector(
@@ -27,7 +28,6 @@ class AccountScreen extends StatelessWidget {
               name,
               style: const TextStyle(
                 color: Color(0xff6b6e73),
-                fontFamily: "Playfair"
               ),
             )
           ],
@@ -42,7 +42,6 @@ class AccountScreen extends StatelessWidget {
         style: const TextStyle(
           fontSize: 18,
           color: Color(0xff4a4c4f),
-          fontFamily: "Playfair"
         ),
       ),
     );
@@ -81,7 +80,7 @@ class AccountScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)
             
                 ),
-                child: const Text("REGISTER/LOGIN",
+                child: const Text("isLoggedIn()",
                     style: TextStyle(
                       color: Color(0xff2d2e30), fontSize: 16, fontFamily: "SourceCode")),
               ),

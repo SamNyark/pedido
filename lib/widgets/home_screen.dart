@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
 import 'package:pedido/components/food_categories.dart';
 import 'package:pedido/components/home_screen_footer.dart';
+import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/screens/food/banku.dart';
 import 'package:pedido/screens/food/fried_rice.dart';
 
@@ -13,6 +15,7 @@ class HomeScreen extends StatelessWidget {
     "assets/images/rice.jpg",
     "assets/images/waakye.jpg"
   ];
+  FirebaseForm formController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,9 @@ class HomeScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
                       padding: const EdgeInsets.symmetric(vertical: 5),
-                      onPressed: () {},
+                      onPressed: () {
+                        formController.signOut();
+                      },
                       icon: const Icon(
                         Icons.search,
                       ),

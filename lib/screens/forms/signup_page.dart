@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
-import 'package:pedido/controllers/signup.dart';
+import 'package:pedido/controllers/loading.dart';
 import 'package:pedido/screens/forms/login_page.dart';
-import 'package:pedido/helpers/init_controller.dart';
+import 'package:pedido/screens/home_page.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   SignupPage({Key? key}) : super(key: key);
 
-  final SignUp signupController = Get.find();
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
   final FirebaseForm formController = Get.find();
+  Loading loading = Get.find();
+
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String? _email, _password, _username;
+
+  bool _showPassword = true;
+
+  void showPassword() {
+    setState(() {
+      _showPassword = !_showPassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +41,11 @@ class SignupPage extends StatelessWidget {
                 colors: [Color(0xffe3c08a), Color(0xffffb13d)])),
         child: Column(
           children: [
+            const SizedBox(height: 18,),
             IconButton(
-              padding: const EdgeInsets.only(right: 350),
+              padding: const EdgeInsets.only(right: 320),
               onPressed: () {
-                Get.back();
+                Get.offAll(const HomePage());
               },
               iconSize: 30,
               icon: const Icon(
@@ -166,7 +181,7 @@ class SignupPage extends StatelessWidget {
                         onSaved: (input) {
                           _password = input;
                         },
-                        obscureText: signupController.showPassword,
+                        obscureText: _showPassword,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.lock,
@@ -174,13 +189,11 @@ class SignupPage extends StatelessWidget {
                           ),
                           suffixIcon: IconButton(
                             onPressed: () {
-                              signupController.toggle();
+                              showPassword();
                             },
-                            icon: GetBuilder<SignUp>(builder: (_){
-                             return Icon(_.showPassword
+                            icon: Icon(_showPassword
                                 ? Icons.visibility
-                                : Icons.visibility_off);
-                            }),
+                                : Icons.visibility_off),
                           ),
                           hintText: "Password",
                           enabledBorder: OutlineInputBorder(
@@ -212,53 +225,48 @@ class SignupPage extends StatelessWidget {
                       const SizedBox(
                         height: 40,
                       ),
-                      SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width * 2 / 3,
-                          child: ElevatedButton(
-                              child: const Text(
-                                "sign up",
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  _formKey.currentState!.save();
-                                  formController.createUser(_username, _email, _password);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.grey,
-                                  padding: const EdgeInsets.all(8),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(25))))),
+                      Obx(() => SizedBox(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 2 / 3,
+                            child: ElevatedButton(
+                                child:  loading.isLoading() ? const Text(
+                              "Signup",
+                              style: TextStyle(fontSize: 18, color: Colors.white),
+                            ) : 
+                            const CircularProgressIndicator(color: Colors.blue,),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+                                    formController.createUser(_username, _email, _password);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.grey,
+                                    padding: const EdgeInsets.all(8),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(25))))),
+                      ),
                       const SizedBox(height: 15),
-                      const Text(
-                        "Already have an account?",
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                           const Text(
+                            "Already have an account?",
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
+                          const SizedBox(width: 10,),
+                          GestureDetector(
+                            onTap: (){
+                              Get.to(LoginPage());
+                            },
+                            child: const Text(
+                              "Login",
+                              style: TextStyle(fontSize: 20, color: Colors.deepOrange, fontFamily: "OrelegaOne"),
+                            ),
+                          ), 
+                        ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width * 2 / 3,
-                          child: ElevatedButton(
-                              child: const Text(
-                                "login",
-                                style: TextStyle(
-                                    fontSize: 20, color: Color(0xff74B51F)),
-                              ),
-                              onPressed: () {
-                                Get.to(const LoginPage());
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.white,
-                                  padding: const EdgeInsets.all(8),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(25)))))
                     ],
                   )),
             ),
