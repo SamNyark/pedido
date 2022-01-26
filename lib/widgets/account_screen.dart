@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
+import 'package:pedido/screens/forms/login_page.dart';
 import 'package:pedido/screens/forms/signup_page.dart';
 
 class AccountScreen extends StatelessWidget {
   AccountScreen({Key? key}) : super(key: key);
   FirebaseForm formController = Get.find();
+  static bool isLoggedIn = false;
 
 
-  Widget detector({icons, name, Function? onTapGesture}) {
+  Widget detector({icons, name, onTapGesture}) {
     return GestureDetector(
         onTap: () {
           onTapGesture!();
@@ -34,7 +36,7 @@ class AccountScreen extends StatelessWidget {
         ));
   }
 
-  Widget listTile({icons, name, Function? onTapGesture}) {
+  Widget listTile({icons, name, onTapGesture}) {
     return ListTile(
       leading: Icon(icons, size: 25, color: Colors.grey),
       title: Text(
@@ -44,6 +46,9 @@ class AccountScreen extends StatelessWidget {
           color: Color(0xff4a4c4f),
         ),
       ),
+      onTap: (){
+        onTapGesture;
+      },
     );
   }
 
@@ -72,7 +77,7 @@ class AccountScreen extends StatelessWidget {
             height: 50,
             top: 30,
             child: GestureDetector(
-              onTap: () { Get.to(SignupPage());},
+              onTap: () { Get.to(const LoginPage());},
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -80,8 +85,8 @@ class AccountScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)
             
                 ),
-                child: const Text("isLoggedIn()",
-                    style: TextStyle(
+                child: Text( isLoggedIn ? "Sign out" : "Login/Register",
+                    style: const TextStyle(
                       color: Color(0xff2d2e30), fontSize: 16, fontFamily: "SourceCode")),
               ),
             ),
@@ -149,7 +154,7 @@ class AccountScreen extends StatelessWidget {
               icons: Icons.location_on_rounded, name: "Address management"),
           listTile(name: "Contact Rider", icons: Icons.contact_phone),
           listTile(name: "Return policy", icons: Icons.read_more),
-          listTile(name: "About us", icons: FontAwesomeIcons.addressCard)
+          listTile(name: "About us", icons: FontAwesomeIcons.addressCard),
             ])
           ])),
     );

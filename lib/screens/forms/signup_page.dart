@@ -6,7 +6,7 @@ import 'package:pedido/screens/forms/login_page.dart';
 import 'package:pedido/screens/home_page.dart';
 
 class SignupPage extends StatefulWidget {
-  SignupPage({Key? key}) : super(key: key);
+  const SignupPage({Key? key}) : super(key: key);
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -41,19 +41,8 @@ class _SignupPageState extends State<SignupPage> {
                 colors: [Color(0xffe3c08a), Color(0xffffb13d)])),
         child: Column(
           children: [
-            const SizedBox(height: 18,),
-            IconButton(
-              padding: const EdgeInsets.only(right: 320),
-              onPressed: () {
-                Get.offAll(const HomePage());
-              },
-              iconSize: 30,
-              icon: const Icon(
-                Icons.arrow_back,
-              ),
-            ),
             const SizedBox(
-              height: 20,
+              height: 80,
             ),
             const Text("Registration",
                 style: TextStyle(
@@ -61,7 +50,7 @@ class _SignupPageState extends State<SignupPage> {
                     fontWeight: FontWeight.bold,
                     fontSize: 20)),
             const SizedBox(
-              height: 50,
+              height: 20,
             ),
             Container(
               margin: const EdgeInsets.only(left: 30, right: 30),
@@ -258,7 +247,7 @@ class _SignupPageState extends State<SignupPage> {
                           const SizedBox(width: 10,),
                           GestureDetector(
                             onTap: (){
-                              Get.to(LoginPage());
+                              Get.to(const LoginPage());
                             },
                             child: const Text(
                               "Login",

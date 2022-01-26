@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/loading.dart';
 import 'package:pedido/screens/forms/login_page.dart';
 import 'package:pedido/screens/home_page.dart';
+import 'package:pedido/widgets/account_screen.dart';
 
 class FirebaseForm extends GetxController{
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -18,17 +18,19 @@ class FirebaseForm extends GetxController{
       if(event == null){
         //  TODO
         print("no user");
-      }else print("signed in");
+      }else {print("signed in");
+          AccountScreen.isLoggedIn = true;
+      }
      });
      super.onInit();
   }
 
   void createUser(String? username, email, password) async{
     try{
-   loading.isLoading(false);   
+   loading.isLoading(false);  
    await _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) async{ if (_user != null && !_user!.emailVerified) {
    await _user!.sendEmailVerification();
-}               Get.offAll(LoginPage());}).onError((error, stackTrace) {
+}               Get.offAll(const LoginPage());}).onError((error, stackTrace) {
       Get.snackbar("Error", error.toString(), colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
     });
   }finally{
@@ -40,7 +42,8 @@ class FirebaseForm extends GetxController{
     try{
     loading.isLoading(false);
     await _auth.signInWithEmailAndPassword(email: email, password: password).then((value){
-      Get.offAll(const HomePage(), arguments: const Text("sign out"));
+      Get.offAll(const HomePage());
+      AccountScreen.isLoggedIn = true;
     }).onError((error, stackTrace) {
       Get.snackbar("Error", error.toString(), colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
     });
