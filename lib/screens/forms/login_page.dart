@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
-import 'package:pedido/controllers/loading.dart';
+import 'package:pedido/controllers/controllers.dart';
 import 'package:pedido/screens/forms/signup_page.dart';
-import 'package:pedido/screens/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   String? _email, _password;
 
   FirebaseForm formController = Get.find();
-  Loading loading = Get.find();
+  Controllers loading = Get.find();
 
   bool _showPassword = true;
 

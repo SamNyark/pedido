@@ -11,9 +11,7 @@ class Friedrice extends StatelessWidget {
         child: const Text("fried rice page", style: TextStyle(
           color: Colors.white,
           fontSize: 25
-    
-        ),),
-        
+        ),),       
       ),
     );
   }

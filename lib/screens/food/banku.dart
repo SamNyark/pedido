@@ -6,13 +6,19 @@ class Banku extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        color: Colors.grey,
-        child: const Text("Banku", style: TextStyle(   
-          color: Colors.white,
-          fontSize: 25
-        ),),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 300,
+            width: double.infinity,
+            child: Image.asset("assets/images/gridBanku.jpg", fit: BoxFit.cover,),
+          ),
+          const SizedBox(height: 30,),
+          const ListTile(
+            trailing: Icon(Icons.favorite),
+          )
+
+        ],
       ),
     );
   }

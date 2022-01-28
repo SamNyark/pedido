@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
-import 'package:pedido/controllers/loading.dart';
+import 'package:pedido/controllers/controllers.dart';
 import 'package:pedido/screens/forms/login_page.dart';
-import 'package:pedido/screens/home_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final FirebaseForm formController = Get.find();
-  Loading loading = Get.find();
+  Controllers loading = Get.find();
 
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
