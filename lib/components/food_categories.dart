@@ -1,66 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/helpers/products.dart';
+import 'package:pedido/widgets/icon_and_text.dart';
 
-Widget foodCategories(int x, int y, {page0, page1}){
-    return Column(
-      children :[ 
-        Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
-        children: [
-          GestureDetector(
-            onTap: (){
-              Get.to(page0);
-            },
-            child: Column(children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: SizedBox(
-                    height: 130,
-                    width: 180,
-                    child: Image.asset(
-                      products[x].image,
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                width: 150,
-                child: Text(products[x].title, style: const TextStyle(color: Color(0xff5c6166), fontFamily: "Playfair")))]),
-          ),
-            GestureDetector(
-              onTap: (){
-                Get.to(page1);
-              },
-              child: Column(
+class FoodList extends StatelessWidget {
+  const FoodList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: products.length,
+      itemBuilder: (context, index) {
+        return Container(
+          margin: const EdgeInsets.only(left: 20, right: 10),
+          padding: const EdgeInsets.only(bottom: 15),
+          child: GestureDetector(
+            child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: SizedBox(
-                      height: 130,
-                      width: 180,
-                      child: Image.asset(
-                        products[y].image,
-                        fit: BoxFit.cover,
-                      )),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
                 Container(
-                  alignment: Alignment.center,
-                  width: 150,
-                  margin: const EdgeInsets.symmetric(horizontal: 5),
-                  child: Text(products[y].title, style: const TextStyle(color: Color(0xff5c6166), fontFamily: "Playfair")))
-              ],
+                  height: 100,
+                  width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(image: AssetImage(products[index].image), fit: BoxFit.cover))),
+                
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15), bottomLeft: Radius.circular(15))
                     ),
+                    width: 250,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(products[index].title, style: const TextStyle(overflow: TextOverflow.ellipsis, fontSize: 16),maxLines: 1,),
+                        const SizedBox(height: 8,),
+                        Text("description"),
+                        const SizedBox(height: 12,),
+                        Row(children: const [
+                          IconAndText(icon: Icons.location_on, text: "location"),
+                          SizedBox(width: 10,),
+                          IconAndText(icon: Icons.access_time_rounded, text: "time")
+                        ],)
+
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
-        ]),
-        const SizedBox(height: 20,)
-      ]);
-      
+          ),
+        );
+      },
+    );
+  }
 }

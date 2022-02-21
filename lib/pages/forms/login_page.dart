@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/controllers/controllers.dart';
-import 'package:pedido/screens/forms/signup_page.dart';
+import 'package:pedido/pages/forms/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -80,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                                   .hasMatch(input)) {
                                 return "Please fill out a valid email";
                               }
+                              return null;
                             },
                             onSaved: (input) {
                               _email = input;
@@ -130,6 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                                   .hasMatch(input)) {
                                 return "password must contain atleast one uppercase letter, a \nlowercase letter and a number ";
                               }
+                              return null;
                             },
                             onSaved: (input) {
                               _password = input;

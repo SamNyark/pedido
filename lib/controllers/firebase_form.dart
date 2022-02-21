@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/controllers.dart';
-import 'package:pedido/screens/forms/login_page.dart';
-import 'package:pedido/screens/home_page.dart';
+import 'package:pedido/pages/forms/login_page.dart';
+import 'package:pedido/pages/home_page.dart';
 
 class FirebaseForm extends GetxController{
   final FirebaseAuth _auth = FirebaseAuth.instance;

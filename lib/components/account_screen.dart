@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/controllers.dart';
 import 'package:pedido/controllers/firebase_form.dart';
-import 'package:pedido/screens/forms/login_page.dart';
+import 'package:pedido/pages/forms/login_page.dart';
 
 class AccountScreen extends StatelessWidget {
   AccountScreen({Key? key}) : super(key: key);
