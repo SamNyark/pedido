@@ -4,6 +4,12 @@ class Products {
   Products(this.image, this.price, this.title);
 }
 
+List carousel = [
+  "assets/images/friedrice.jpg",
+  "assets/images/rice.jpg",
+  "assets/images/waakye.jpg"
+];
+
 List<Products> products = [
   Products(
       "assets/images/gridBanku.jpg",

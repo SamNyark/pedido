@@ -9,6 +9,8 @@ class FirebaseForm extends GetxController{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Controllers _controllers = Get.find();
 
+  
+
 
   @override
   void onInit(){

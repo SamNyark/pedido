@@ -3,6 +3,8 @@ import 'package:pedido/components/account_screen.dart';
 import 'package:pedido/components/cart_screen.dart';
 import 'package:pedido/components/home_screen.dart';
 import 'package:pedido/components/seller_screen.dart';
+import 'package:pedido/helpers/colors.dart';
+import 'package:pedido/helpers/dimensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,18 +29,18 @@ class _HomePageState extends State<HomePage> {
             });
           },
           type: BottomNavigationBarType.fixed,
-          backgroundColor: const Color(0xfff2f2f2),
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.black,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home, size: 25,), label: "Home",
+          backgroundColor: Colors.white,
+          unselectedItemColor: AppColors.secondaryColor,
+          selectedItemColor: AppColors.mainColor,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home, size: Dimensions.bottomIconSize,), label: "Home",
             backgroundColor: Colors.grey),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border_rounded, size: 25,), label: "Sellers"),
+                icon: Icon(Icons.favorite_border_rounded, size: Dimensions.bottomIconSize,), label: "Sellers"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart, size: 25,), label: "Cart",),
+                icon: Icon(Icons.shopping_cart, size: Dimensions.bottomIconSize,), label: "Cart",),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle, size: 25,), label: "Account")
+                icon: Icon(Icons.account_circle, size: Dimensions.bottomIconSize,), label: "Account")
           ],
         ),
       ),
