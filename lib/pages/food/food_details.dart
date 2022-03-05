@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
-import 'package:pedido/helpers/products.dart';
+import 'package:pedido/data/all_products.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
 import 'package:pedido/widgets/details_collapse.dart';
 import 'package:pedido/widgets/icon_and_text.dart';
 
-class FoodDetails extends StatelessWidget {
+class FoodDetails extends StatefulWidget {
   const FoodDetails({Key? key}) : super(key: key);
 
+  @override
+  State<FoodDetails> createState() => _FoodDetailsState();
+}
+
+class _FoodDetailsState extends State<FoodDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

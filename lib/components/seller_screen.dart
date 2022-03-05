@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pedido/helpers/products.dart';
+import 'package:pedido/data/all_products.dart';
 
 class SellerScreen extends StatelessWidget {
   const SellerScreen({ Key? key }) : super(key: key);

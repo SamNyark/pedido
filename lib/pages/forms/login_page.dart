@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/controllers/controllers.dart';
+import 'package:pedido/helpers/colors.dart';
+import 'package:pedido/helpers/dimensions.dart';
 import 'package:pedido/pages/forms/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -39,147 +41,161 @@ class _LoginPageState extends State<LoginPage> {
                   colors: [Color(0xffe3c08a), Color(0xffffb13d)])),
           child: Column(
             children: [
-              const SizedBox(height: 20,),
+              SizedBox(height: Dimensions.height30,),
               IconButton(
-              padding: const EdgeInsets.only(right: 320),
+              padding: EdgeInsets.only(right: Dimensions.width320),
               onPressed: () {
                 Get.back();
               },
-              iconSize: 30,
-              icon: const Icon(
+              iconSize: Dimensions.height30,
+              icon: Icon(
                 Icons.arrow_back,
+                color: AppColors.secondaryColor,
               ),
             ),
               Container(
-                  margin: const EdgeInsets.only(
-                    left: 30,
-                    right: 30,
+                  margin: EdgeInsets.only(
+                    left: Dimensions.width30,
+                    right: Dimensions.width30,
                   ),
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: Dimensions.height10),
                   child: Form(
                       key: _formKey,
                       child: Column(
                         children: [
-                          const SizedBox(
-                            height: 100,
+                          SizedBox(
+                            height: Dimensions.height100,
                           ),
-                          const Text(
+                          Text(
                             "Login",
                             style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
+                              color: AppColors.secondaryColor,
+                                fontSize: Dimensions.height23, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
-                            height: 40,
+                          SizedBox(
+                            height: Dimensions.height40,
                           ),
-                          TextFormField(
-                            validator: (input) {
-                              if (input == null || input.isEmpty) {
-                                return "Please fill out this field";
-                              } else if (!RegExp(
-                                      r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                                  .hasMatch(input)) {
-                                return "Please fill out a valid email";
-                              }
-                              return null;
-                            },
-                            onSaved: (input) {
-                              _email = input;
-                            },
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: Colors.grey[700],
+                          SizedBox(
+                            height: Dimensions.height60,
+                            child: TextFormField(
+                              validator: (input) {
+                                if (input == null || input.isEmpty) {
+                                  return "Please fill out this field";
+                                } else if (!RegExp(
+                                        r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                                    .hasMatch(input)) {
+                                  return "Please fill out a valid email";
+                                }
+                                return null;
+                              },
+                              onSaved: (input) {
+                                _email = input;
+                              },
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.email,
+                                  color: AppColors.secondaryColor,
+                                ),
+                                hintText: "Email",
+                                hintStyle: TextStyle(
+                              fontSize: Dimensions.height16,
+                              color: AppColors.secondaryColor
+                            ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color: AppColors.mainColor)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color: AppColors.secondaryColor)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color: Colors.red.shade400)),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color: Colors.red.shade400)),
                               ),
-                              labelText: "Email",
-                              labelStyle: const TextStyle(color: Colors.black),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.white)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.red.shade400)),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.red.shade400)),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: Dimensions.height20,
                           ),
-                          TextFormField(
-                            validator: (input) {
-                              if (input == null || input.isEmpty) {
-                                return "Please fill out this field";
-                              }
-                              if (!RegExp(
-                                      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
-                                  .hasMatch(input)) {
-                                return "password must contain atleast one uppercase letter, a \nlowercase letter and a number ";
-                              }
-                              return null;
-                            },
-                            onSaved: (input) {
-                              _password = input;
-                            },
-                            obscureText: _showPassword,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                color: Colors.grey[700],
+                          SizedBox(
+                            height: Dimensions.height60,
+                            child: TextFormField(
+                              validator: (input) {
+                                if (input == null || input.isEmpty) {
+                                  return "Please fill out this field";
+                                }
+                                if (!RegExp(
+                                        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
+                                    .hasMatch(input)) {
+                                  return "password must contain atleast one uppercase letter, a \nlowercase letter and a number ";
+                                }
+                                return null;
+                              },
+                              onSaved: (input) {
+                                _password = input;
+                              },
+                              obscureText: _showPassword,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  color: AppColors.secondaryColor,
+                                ),
+                                hintText: "Password",
+                                hintStyle: TextStyle(
+                              fontSize: Dimensions.height16,
+                              color: AppColors.secondaryColor
+                            ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(_showPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off, color: AppColors.secondaryColor,),
+                                  onPressed: () {
+                                    showPassword();
+                                  },
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color: AppColors.mainColor)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color:  AppColors.secondaryColor)),
+                                errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: Dimensions.width3,
+                                        style: BorderStyle.solid,
+                                        color: Colors.red.shade400)),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(Dimensions.height13),
+                                    borderSide: BorderSide(
+                                        width: 3,
+                                        style: BorderStyle.solid,
+                                        color: Colors.red.shade400)),
                               ),
-                              labelText: "Password",
-                              labelStyle: const TextStyle(color: Colors.black),
-                              suffixIcon: IconButton(
-                                icon: Icon(_showPassword
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                onPressed: () {
-                                  showPassword();
-                                },
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: const BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.white)),
-                              errorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.red.shade400)),
-                              focusedErrorBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: BorderSide(
-                                      width: 3,
-                                      style: BorderStyle.solid,
-                                      color: Colors.red.shade400)),
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
+                          SizedBox(
+                            height: Dimensions.height5,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -188,29 +204,28 @@ class _LoginPageState extends State<LoginPage> {
                                 onTap: () {
                                   //todo
                                 },
-                                child: const Text(
+                                child: Text(
                                   "forget password",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.redAccent,
-                                      fontSize: 16),
+                                      color: Colors.deepOrange,
+                                      fontSize: Dimensions.height16),
                                 ),
                               )
                             ],
                           ),
-                          const SizedBox(
-                            height: 15,
+                          SizedBox(
+                            height: Dimensions.height16,
                           ),
                           Obx(() => SizedBox(
-                              height: 50,
+                              height: Dimensions.width50,
                               width: MediaQuery.of(context).size.width * 2 / 3,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    primary: Colors.grey,
-                                    shadowColor: Colors.grey,
+                                    primary: AppColors.secondaryColor,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
+                                      borderRadius: BorderRadius.circular(Dimensions.height23),
                                     )),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
@@ -218,33 +233,33 @@ class _LoginPageState extends State<LoginPage> {
                                     formController.login(_email, _password);
                                   }
                                 },
-                                child:  loading.isLoading() ? const Text(
+                                child:  loading.isLoading() ? Text(
                                   "Login",
-                                  style: TextStyle(fontSize: 18, color: Colors.white),
+                                  style: TextStyle(fontSize: Dimensions.height18, color: Colors.white),
                                 ) : 
-                                const CircularProgressIndicator(color: Colors.blue,),
+                                CircularProgressIndicator(color: AppColors.mainColor,),
                                 )
                               ),
                             ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: Dimensions.height16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
+                              Text(
                                 "Don't have an account?",
-                                style: TextStyle(fontSize: 16, color: Colors.white),
+                                style: TextStyle(fontSize: Dimensions.height16, color: Colors.white),
                               ),
-                              const SizedBox(
-                                width: 10,
+                              SizedBox(
+                                width: Dimensions.width10,
                               ),
                               GestureDetector(
                                 onTap: () {
                                   Get.to(const SignupPage());
                                 },
-                                child: const Text(
+                                child: Text(
                                   "Signup",
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: Dimensions.height20,
                                       color: Colors.deepOrange,
                                       fontFamily: "OrelegaOne"),
                                 ),

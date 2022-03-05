@@ -1,6 +1,8 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pedido/pages/food/food_details.dart';
+import 'package:pedido/pages/forms/login_page.dart';
+import 'package:pedido/pages/forms/signup_page.dart';
 import 'pages/home_page.dart';
 import 'helpers/init_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
