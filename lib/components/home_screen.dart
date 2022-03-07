@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
               margin: EdgeInsets.only(top: Dimensions.height10),
               padding: EdgeInsets.only(top: Dimensions.height4),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(Dimensions.height16),
                   color: AppColors.searchBoxColor),
               width: Dimensions.width200,
               height: Dimensions.height40,
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         i.data() as Map<String, dynamic>;
                     return FutureBuilder(
                         future: FirebaseStorage.instance
-                            .ref(popularProducts['image'])
+                            .ref("${popularProducts['image']}")
                             .getDownloadURL(),
                         builder: (context, snapshots) {
                           if (!snapshots.hasData) {
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               margin: EdgeInsets.symmetric(
                                   horizontal: Dimensions.width5),
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(Dimensions.height16),
                                   child: Image(
                                     image:
                                         NetworkImage(snapshots.data.toString()),

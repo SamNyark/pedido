@@ -1,14 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 class AllProducts {
   String? title;
   String? image;
-  double? price;
+  int? price;
   String? description;
-  List<AllProducts> _list = [];
 
-  //AllProducts(this.image, this.price, this.title, this.description);
+  AllProducts(this.image, this.price, this.title, this.description);
 
   AllProducts.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -18,15 +14,15 @@ class AllProducts {
   }
 }
 
-List carousel = [
-  "assets/images/fried_rice.jpg",
-  "assets/images/rice.jpg",
-  "assets/images/waakye.jpg"
-];
+// List carousel = [
+//   "assets/images/fried_rice.jpg",
+//   "assets/images/rice.jpg",
+//   "assets/images/waakye.jpg"
+// ];
 
 class Product {
   final String title;
-  final double price;
+  final int price;
   final String image;
   Product(this.image, this.price, this.title);
 }
