@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
-import 'package:pedido/data/all_products.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
 import 'package:pedido/widgets/details_collapse.dart';
 import 'package:pedido/widgets/icon_and_text.dart';
@@ -192,20 +191,11 @@ class _FoodDetailsState extends State<FoodDetails> {
                   Container(
                     margin: EdgeInsets.only(left: Dimensions.width20),
                     height: Dimensions.height50,
-                    width: Dimensions.width120,
+                    width: Dimensions.width80,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.height5),
                         color: Colors.white),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.remove)),
-                        const BigText(text: "0"),
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.add)),
-                      ],
-                    ),
+                    child: Center(child: BigText(text: "${product['price']}"))
                   ),
                   Container(
                       margin: EdgeInsets.only(right: Dimensions.width20),

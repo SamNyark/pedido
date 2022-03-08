@@ -9,7 +9,6 @@ import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
 
-import '../data/all_products.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
-import 'package:pedido/widgets/big_text_and_small_text.dart';
 
 class IconAndText extends StatelessWidget {
   final IconData icon;

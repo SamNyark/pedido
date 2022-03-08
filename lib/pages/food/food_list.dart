@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
-import 'package:pedido/data/all_products.dart';
 import 'package:pedido/helpers/routes.dart';
-import 'package:pedido/pages/food/food_details.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
 import 'package:pedido/widgets/icon_and_text.dart';
 

@@ -41,6 +41,8 @@ class Dimensions{
   static double width250 = screenWidget / 1.57;
   static double width320 = screenWidget / 1.23;
   static double width50 = screenWidget / 7.86;
+  static double width80 = screenWidget / 4.91;
+  
   
 
 
