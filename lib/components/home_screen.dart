@@ -75,16 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
               .collection('popular_products')
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
-            if (!snapshots.hasData) {
-              return Container(
-                  height: Dimensions.height150,
-                  padding: EdgeInsets.symmetric(
-                      vertical: Dimensions.height50,
-                      horizontal: Dimensions.width50),
-                  child: CircularProgressIndicator(
-                    color: AppColors.mainColor,
-                  ));
-            }
+            // if (!snapshots.hasData) {
+            //   return Container(
+            //       height: Dimensions.height150,
+            //       padding: EdgeInsets.symmetric(
+            //           vertical: Dimensions.height50,
+            //           horizontal: Dimensions.width50),
+            //       child: CircularProgressIndicator(
+            //         color: AppColors.mainColor,
+            //       ));
+            // }
 
             return CarouselSlider(
                 options: CarouselOptions(
