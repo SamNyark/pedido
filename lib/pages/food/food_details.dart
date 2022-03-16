@@ -43,6 +43,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                     builder: (context, snapshots) {
                       return Container(
                         decoration: BoxDecoration(
+                          color: AppColors.secondaryColor,
                             image: DecorationImage(
                                 image: NetworkImage(snapshots.data.toString()),
                                 fit: BoxFit.cover)),
@@ -98,14 +99,14 @@ class _FoodDetailsState extends State<FoodDetails> {
                 Positioned(
                     left: 0,
                     right: 0,
-                    top: Dimensions.height235,
+                    top: Dimensions.height230,
                     bottom: 0,
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(Dimensions.height20),
-                              topRight: Radius.circular(Dimensions.height20))),
+                              topLeft: Radius.circular(Dimensions.height30),
+                              topRight: Radius.circular(Dimensions.height30))),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

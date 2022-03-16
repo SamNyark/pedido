@@ -64,6 +64,7 @@ class _FoodListState extends State<FoodList> {
                             height: Dimensions.height100,
                             width: Dimensions.width100,
                             decoration: BoxDecoration(
+                              color: AppColors.secondaryColor,
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.height20),
                                 image: DecorationImage(

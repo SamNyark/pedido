@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore: ^3.1.10
   shared_preferences: ^2.0.13
   firebase_storage: 
+  shimmer: ^2.0.0
   
   
 

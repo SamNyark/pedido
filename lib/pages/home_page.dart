@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pedido/components/account_screen.dart';
-import 'package:pedido/components/cart_screen.dart';
-import 'package:pedido/components/home_screen.dart';
-import 'package:pedido/components/seller_screen.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
+import 'package:pedido/screens/home_screen.dart';
+import '../screens/account_screen.dart';
+import '../screens/cart_screen.dart';
+import '../screens/seller_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
    int _currentIndex = 0;
-  final tabView = [const HomeScreen(), const SellerScreen(), const Cart(), AccountScreen()];
+  final tabView = [const HomeScreen(), SellerScreen(), const Cart(), AccountScreen()];
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -4,6 +4,7 @@ import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/controllers/controllers.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
+import 'package:pedido/helpers/routes.dart';
 import 'package:pedido/pages/forms/login_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? _email, _password, _username;
+  String? _email, _password, _firstName, _lastName;
 
   bool _showPassword = true;
 
@@ -41,8 +42,14 @@ class _SignupPageState extends State<SignupPage> {
                 colors: [Color(0xffe3c08a), Color(0xffffb13d)])),
         child: Column(
           children: [
+            SizedBox(height: Dimensions.height30,),
+            IconButton(
+              padding: EdgeInsets.only(right: Dimensions.width320),
+              onPressed: (){
+              Get.toNamed(Routes.initial);
+            }, icon: Icon(Icons.arrow_back_ios_new)),
             SizedBox(
-              height: Dimensions.height80,
+              height: Dimensions.height50,
             ),
             Text("Registration",
                 style: TextStyle(
@@ -70,14 +77,14 @@ class _SignupPageState extends State<SignupPage> {
                             return null;
                           },
                           onSaved: (input) {
-                            _username = input;
+                            _firstName = input;
                           },
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.person,
                               color: AppColors.secondaryColor,
                             ),
-                            hintText: "Username",
+                            hintText: "first name",
                             hintStyle: TextStyle(
                               fontSize: Dimensions.height16,
                               color: AppColors.secondaryColor
@@ -116,6 +123,60 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(
                         height: Dimensions.height10,
                       ),
+                      SizedBox(
+                        height: Dimensions.height60,
+                        child: TextFormField(
+                          validator: (input) {
+                            if (input == null || input.isEmpty) {
+                              return "Field is required";
+                            }
+                            return null;
+                          },
+                          onSaved: (input) {
+                            _lastName = input;
+                          },
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: AppColors.secondaryColor,
+                            ),
+                            hintText: "Last name",
+                            hintStyle: TextStyle(
+                              fontSize: Dimensions.height16,
+                              color: AppColors.secondaryColor
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
+                                borderSide: BorderSide(
+                                    color: AppColors.secondaryColor,
+                                    style: BorderStyle.solid,
+                                    width: Dimensions.width3)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
+                                borderSide: BorderSide(
+                                    color: Colors.white,
+                                    style: BorderStyle.solid,
+                                    width: Dimensions.width3)),
+                            errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
+                                borderSide: BorderSide(
+                                    width: Dimensions.width3,
+                                    style: BorderStyle.solid,
+                                    color: Colors.red.shade400)),
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
+                                borderSide: BorderSide(
+                                    width: Dimensions.width3,
+                                    style: BorderStyle.solid,
+                                    color: Colors.red.shade400)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10,),
                       SizedBox(
                         height: Dimensions.height60,
                         child: TextFormField(
@@ -266,7 +327,7 @@ class _SignupPageState extends State<SignupPage> {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
                                     formController.createUser(
-                                        _username, _email, _password);
+                                        _email, _password);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -289,7 +350,7 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(const LoginPage());
+                              Get.toNamed(Routes.login);
                             },
                             child: Text(
                               "Login",

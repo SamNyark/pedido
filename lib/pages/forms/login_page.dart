@@ -4,6 +4,7 @@ import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/controllers/controllers.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
+import 'package:pedido/helpers/routes.dart';
 import 'package:pedido/pages/forms/signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,17 +43,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               SizedBox(height: Dimensions.height30,),
-              IconButton(
-              padding: EdgeInsets.only(right: Dimensions.width320),
-              onPressed: () {
-                Get.back();
-              },
-              iconSize: Dimensions.height30,
-              icon: Icon(
-                Icons.arrow_back,
-                color: AppColors.secondaryColor,
-              ),
-            ),
               Container(
                   margin: EdgeInsets.only(
                     left: Dimensions.width30,
@@ -106,13 +96,13 @@ class _LoginPageState extends State<LoginPage> {
                                     borderSide: BorderSide(
                                         width: Dimensions.width3,
                                         style: BorderStyle.solid,
-                                        color: AppColors.mainColor)),
+                                        color: AppColors.secondaryColor)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(Dimensions.height13),
                                     borderSide: BorderSide(
                                         width: Dimensions.width3,
                                         style: BorderStyle.solid,
-                                        color: AppColors.secondaryColor)),
+                                        color: AppColors.mainColor)),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(Dimensions.height13),
                                     borderSide: BorderSide(
@@ -172,13 +162,13 @@ class _LoginPageState extends State<LoginPage> {
                                     borderSide: BorderSide(
                                         width: Dimensions.width3,
                                         style: BorderStyle.solid,
-                                        color: AppColors.mainColor)),
+                                        color: AppColors.secondaryColor)),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(Dimensions.height13),
                                     borderSide: BorderSide(
                                         width: Dimensions.width3,
                                         style: BorderStyle.solid,
-                                        color:  AppColors.secondaryColor)),
+                                        color:  AppColors.mainColor)),
                                 errorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(Dimensions.height13),
                                     borderSide: BorderSide(
@@ -202,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  //todo
+                                  Get.toNamed(Routes.forgetPassword);
                                 },
                                 child: Text(
                                   "forget password",

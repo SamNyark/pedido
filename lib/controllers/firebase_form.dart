@@ -1,61 +1,100 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/controllers.dart';
-import 'package:pedido/pages/forms/login_page.dart';
-import 'package:pedido/pages/home_page.dart';
+import 'package:pedido/helpers/routes.dart';
 
-class FirebaseForm extends GetxController{
+class FirebaseForm extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? user;
   final Controllers _controllers = Get.find();
-
-  
-
+  Timer? _timer;
 
   @override
-  void onInit(){
+  void onInit() {
     _auth.authStateChanges().listen((event) {
-      if(event == null){
+      if (event == null) {
         //  TODO
-        print("no user");
-          _controllers.isLoggedIn(false);
-      }else {print("signed in");
-          _controllers.isLoggedIn(true);
+        _controllers.isLoggedIn(false);
+      } else {
+        _controllers.isLoggedIn(true);
       }
-     });
-     super.onInit();
-  }
-
-  void createUser(String? username, email, password) async{
-    try{
-   _controllers.isLoading(false);  
-   await _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) async{ 
-   await _auth.currentUser!.sendEmailVerification();
-              Get.offAll(const LoginPage());}).onError((error, stackTrace) {
-      Get.snackbar("Error", error.toString(), colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
     });
-  }finally{
-    _controllers.isLoading(true);
-  }
+
+    super.onInit();
   }
 
-  void login(email, password) async{
-    try{
-    _controllers.isLoading(false);
-    await _auth.signInWithEmailAndPassword(email: email, password: password).then((value){
-      Get.offAll(const HomePage());
-      _controllers.isLoggedIn(true);
-    }).onError((error, stackTrace) {
-      Get.snackbar("Error", error.toString(), colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
-    });
-  }
-  finally{
-    _controllers.isLoading(true);
-  }
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
   }
 
-  void signOut() async{
+  Future<void> createUser(_email, _password) async {
+    try {
+      _controllers.isLoading(false);
+      await _auth
+          .createUserWithEmailAndPassword(email: _email, password: _password)
+          .then((value) async {
+        await _auth.currentUser!.sendEmailVerification();
+        Get.snackbar("Verification", "email verification sent to $_email, click to confirm");
+        _timer = Timer.periodic(Duration(seconds: 2), (timer) {
+          emailVerified();
+        });
+      }).onError((error, stackTrace) {
+        Get.snackbar("Error", error.toString(),
+            colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
+      });
+    } finally {
+      _controllers.isLoading(true);
+    }
+  }
+
+  Future<void> login(_email, _password) async {
+    try {
+      _controllers.isLoading(false);
+      await _auth
+          .signInWithEmailAndPassword(email: _email, password: _password)
+          .then((value) {
+        Get.offAllNamed(Routes.initial);
+        _controllers.isLoggedIn(true);
+      }).onError((error, stackTrace) {
+        Get.snackbar("Error", error.toString(),
+            colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
+      });
+    } finally {
+      _controllers.isLoading(true);
+    }
+  }
+
+  void signOut() async {
     await _auth.signOut();
   }
 
+  void passwordReset(String email) async{
+    print("called");
+    try{
+      await _auth.sendPasswordResetEmail(email: email).then((value) {
+      Get.offAllNamed(Routes.login);
+      Get.snackbar("Reset","A link have been sent to $email. Click to reset password", duration: Duration(seconds: 5));
+    });
+    }on FirebaseAuthException catch(e){
+      Get.snackbar("title", "$e");
+    }
+    
+  }
+
+
+  Future<void> emailVerified() async {
+    user = _auth.currentUser;
+    await user!.reload();
+    if (user!.emailVerified) {
+      _timer!.cancel();
+      Get.offAndToNamed(Routes.initial);
+      _controllers.isLoggedIn(true);
+      
+    }
+  }
 }
