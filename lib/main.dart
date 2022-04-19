@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
-      initialBinding: initDept(),
+      initialBinding: InitDept(),
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
