@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'helpers/routes.dart';
-import 'pages/home_page.dart';
-import 'helpers/init_controller.dart';
+import 'helpers/init_bindings.dart' as binding;
 import 'package:firebase_core/firebase_core.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await binding.initBindings();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -17,16 +16,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
-      initialBinding: InitDept(),
+    return GetMaterialApp(
       theme: ThemeData(
         fontFamily: "Roboto",
-        primarySwatch: Colors.grey,
       ),
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.initial,
       getPages: Routes.routes,
-      home: const HomePage(),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:pedido/pages/food/food_list.dart';
 import 'package:pedido/controllers/firebase_form.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
-
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -75,9 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
             if (!snapshots.hasData) {
-              return Container();
+              return Shimmer.fromColors(
+                baseColor: AppColors.secondaryColor,
+                highlightColor: Colors.grey,
+                child: Container(
+                  height: Dimensions.height150,
+                  width: Dimensions.width200,
+                ),
+              );
             }
-
             return CarouselSlider(
                 options: CarouselOptions(
                     autoPlayInterval: const Duration(seconds: 2),
@@ -101,27 +107,28 @@ class _HomeScreenState extends State<HomeScreen> {
                             .getDownloadURL(),
                         builder: (context, snapshots) {
                           if (!snapshots.hasData) {
-                            return Container(
-                                height: Dimensions.height150,
-                                padding: EdgeInsets.symmetric(
-                                    vertical: Dimensions.height50,
-                                    horizontal: Dimensions.width120 +
-                                        Dimensions.width50),
-                                child: CircularProgressIndicator(
-                                  color: AppColors.mainColor,
-                                ));
+                            return Shimmer.fromColors(
+                              baseColor: AppColors.secondaryColor,
+                              highlightColor: Colors.grey,
+                              child: Container(
+                                height: Dimensions.height250,
+                                width: Dimensions.width200,
+                              ),
+                            );
                           }
                           return Container(
-                              width: double.maxFinite,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: Dimensions.width5),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(Dimensions.height16),
-                                  child: Image(
+                              decoration: BoxDecoration(
+                                  color: AppColors.secondaryColor,
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.height16),
+                                  image: DecorationImage(
                                     image:
                                         NetworkImage(snapshots.data.toString()),
                                     fit: BoxFit.cover,
-                                  )));
+                                  )),
+                              width: double.maxFinite,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.width5));
                         });
                   });
                 }).toList());

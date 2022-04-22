@@ -103,7 +103,7 @@ class FirebaseForm extends GetxController {
     if (user!.emailVerified) {
       _timer!.cancel();
       Get.offAndToNamed(Routes.initial);
-      _controllers.isLoggedIn(true);
+      _controllers.isLoggedIn(true); 
     }
   }
 }

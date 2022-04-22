@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pedido/controllers/cart.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
 import 'package:pedido/helpers/routes.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
 import 'package:pedido/widgets/icon_and_text.dart';
+import 'package:shimmer/shimmer.dart';
 
 class FoodList extends StatefulWidget {
   const FoodList({Key? key}) : super(key: key);
@@ -21,6 +23,8 @@ class _FoodListState extends State<FoodList> {
       .doc("dvqOMIP97G6HWpcpSJeb")
       .collection("all_products")
       .snapshots();
+
+  CartController cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +56,17 @@ class _FoodListState extends State<FoodList> {
                           .getDownloadURL(),
                       builder: (context, AsyncSnapshot<String> snapshots) {
                         if (!snapshots.hasData) {
-                          return Container(
-                              
-                              );
+                          return Shimmer.fromColors(
+                            baseColor: AppColors.secondaryColor,
+                            highlightColor: AppColors.searchBoxColor,
+                            child: Container(
+                              height: Dimensions.height100,
+                              width: Dimensions.width100,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.height20)),
+                            ),
+                          );
                         }
                         return Hero(
                           tag: "identifier$index",
@@ -62,12 +74,12 @@ class _FoodListState extends State<FoodList> {
                               height: Dimensions.height100,
                               width: Dimensions.width100,
                               decoration: BoxDecoration(
-                                color: AppColors.secondaryColor,
-                                  borderRadius:
-                                      BorderRadius.circular(Dimensions.height20),
+                                  color: AppColors.secondaryColor,
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.height20),
                                   image: DecorationImage(
-                                      image:
-                                          NetworkImage(snapshots.data.toString()),
+                                      image: NetworkImage(
+                                          snapshots.data.toString()),
                                       fit: BoxFit.cover))),
                         );
                       },

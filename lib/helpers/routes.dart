@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pedido/pages/food/food_details.dart';
 import 'package:pedido/pages/forms/login_page.dart';
+import 'package:pedido/pages/forms/profile_page.dart';
 import 'package:pedido/pages/forms/reset_password_page.dart';
 import 'package:pedido/pages/forms/signup_page.dart';
 import 'package:pedido/pages/home_page.dart';
@@ -14,6 +15,7 @@ class Routes {
   static String login = "/login";
   static String forgetPassword = "/forget-password";
   static String account = "/account";
+  static String profile = "/profile";
 
   static String foodDetailsPage(int index) => "$foodDetails?index=$index";
 
@@ -29,11 +31,15 @@ class Routes {
         page: () {
           var index = Get.parameters['index'];
           return FoodDetails(index: int.parse(index!));
-          
         }),
-        GetPage(name: signUp, page: () => SignupPage(), transition: Transition.fade, transitionDuration: Duration(milliseconds: 500)),
-        GetPage(name: login, page: () => LoginPage()),
-        GetPage(name: forgetPassword, page: () => ResetPassword()),
-        GetPage(name: account, page: () => AccountScreen())
+    GetPage(
+        name: signUp,
+        page: () => SignupPage(),
+        transition: Transition.fade,
+        transitionDuration: Duration(milliseconds: 500)),
+    GetPage(name: login, page: () => LoginPage()),
+    GetPage(name: forgetPassword, page: () => ResetPassword()),
+    GetPage(name: account, page: () => AccountScreen()),
+    GetPage(name: profile, page: () => Profile(), transition: Transition.fade, transitionDuration: Duration(milliseconds: 500))
   ];
 }

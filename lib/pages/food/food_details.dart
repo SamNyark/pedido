@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pedido/controllers/cart.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
@@ -12,7 +13,7 @@ import 'package:pedido/widgets/icon_and_text.dart';
 
 class FoodDetails extends StatefulWidget {
   final int index;
-  const FoodDetails({Key? key, required this.index}) : super(key: key);
+  FoodDetails({Key? key, required this.index}) : super(key: key);
 
   @override
   State<FoodDetails> createState() => _FoodDetailsState();
@@ -32,6 +33,8 @@ class _FoodDetailsState extends State<FoodDetails> {
     return format.currencySymbol;
   }
 
+  CartController cartController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,6 +43,7 @@ class _FoodDetailsState extends State<FoodDetails> {
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
             Map<String, dynamic> product = snapshots.data!.docs[widget.index]
                 .data() as Map<String, dynamic>;
+            cartController.initQuantity();
             return Scaffold(
               body: Stack(
                 children: [
@@ -306,20 +310,29 @@ class _FoodDetailsState extends State<FoodDetails> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          cartController.setQuantity(false);
+                                        },
                                         icon: Icon(Icons.remove)),
                                     SizedBox(
                                       width: Dimensions.width5,
                                     ),
-                                    const SmallText(
-                                      text: "1",
-                                      size: 18,
+                                    GetBuilder<CartController>(
+                                      builder: (_) {
+                                        return SmallText(
+                                          text: cartController.quantity
+                                              .toString(),
+                                          size: 18,
+                                        );
+                                      },
                                     ),
                                     SizedBox(
                                       width: Dimensions.width5,
                                     ),
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          cartController.setQuantity(true);
+                                        },
                                         icon: Icon(Icons.add)),
                                   ],
                                 ),

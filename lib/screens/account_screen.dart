@@ -16,8 +16,8 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Obx((() => 
-          Stack(
+        body: Obx(
+          (() => Stack(
                 children: [
                   Positioned(
                       top: 0,
@@ -28,8 +28,10 @@ class AccountScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: AppColors.mainColor,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(Dimensions.height50),
-                                bottomRight: Radius.circular(Dimensions.height50))),
+                                bottomLeft:
+                                    Radius.circular(Dimensions.height50),
+                                bottomRight:
+                                    Radius.circular(Dimensions.height50))),
                       )),
                   Positioned(
                       top: Dimensions.height30,
@@ -38,70 +40,65 @@ class AccountScreen extends StatelessWidget {
                       height: Dimensions.height50,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            onPrimary: AppColors.secondaryColor,
+                              onPrimary: AppColors.secondaryColor,
                               primary: Colors.white,
                               shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(Dimensions.height50))),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.height50))),
                           onPressed: () {
-                            if(_controllers.isLoggedIn() == false){
+                            if (_controllers.isLoggedIn() == false) {
                               Get.toNamed(Routes.signUp);
                             }
                           },
-                          child: BigText(text: _controllers.isLoggedIn() ? "Welcome" : "sign up / login",))),
-                
-              Positioned(
-                top: Dimensions.height120,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: ListView(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text("Profile"),
-                    iconColor: AppColors.secondaryColor,
-                    textColor: AppColors.secondaryColor,
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.payment),
-                    title: Text("Payment"),
-                    iconColor: AppColors.secondaryColor,
-                    textColor: AppColors.secondaryColor,
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text("Settings"),
-                    iconColor: AppColors.secondaryColor,
-                    textColor: AppColors.secondaryColor,
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text("About"),
-                    iconColor: AppColors.secondaryColor,
-                    textColor: AppColors.secondaryColor,
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.help),
-                    title: Text("Help"),
-                    iconColor: AppColors.secondaryColor,
-                    textColor: AppColors.secondaryColor,
-                  ),
-                  ListTile(
-                    onTap: (){
-                      _formController.signOut();
-                      _controllers.isLoggedIn(false);
-                    },
-                    iconColor: AppColors.secondaryColor,
-                    textColor: AppColors.secondaryColor,
-                    title: _controllers.isLoggedIn() ? Text("log out") : null,
-                    leading: _controllers.isLoggedIn() ? Icon(Icons.logout): null,
-                  )
+                          child: BigText(
+                            text: _controllers.isLoggedIn()
+                                ? "Welcome"
+                                : "sign up / login",
+                          ))),
+                  Positioned(
+                      top: Dimensions.height120,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: ListView(
+                        children: [
+                          ListTile(
+                            onTap: (() {
+                              Get.toNamed(Routes.profile);
+                            }),
+                            leading: Icon(Icons.person),
+                            title: Text("Profile"),
+                            iconColor: AppColors.secondaryColor,
+                            textColor: AppColors.secondaryColor,
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.payment),
+                            title: Text("Payment"),
+                            iconColor: AppColors.secondaryColor,
+                            textColor: AppColors.secondaryColor,
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.settings),
+                            title: Text("Settings"),
+                            iconColor: AppColors.secondaryColor,
+                            textColor: AppColors.secondaryColor,
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.info),
+                            title: Text("About"),
+                            iconColor: AppColors.secondaryColor,
+                            textColor: AppColors.secondaryColor,
+                          ),
+                          ListTile(
+                            leading: const Icon(Icons.help),
+                            title: Text("Help"),
+                            iconColor: AppColors.secondaryColor,
+                            textColor: AppColors.secondaryColor,
+                          ),
+                        ],
+                      ))
                 ],
-              ))
-              
-            ],
-          )),
+              )),
         ),
       ),
     );
