@@ -82,7 +82,7 @@ class AccountScreen extends StatelessWidget {
                     textColor: AppColors.secondaryColor,
                   ),
                   ListTile(
-                    leading: Icon(Icons.help),
+                    leading: const Icon(Icons.help),
                     title: Text("Help"),
                     iconColor: AppColors.secondaryColor,
                     textColor: AppColors.secondaryColor,

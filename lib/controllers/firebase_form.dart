@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,17 +33,26 @@ class FirebaseForm extends GetxController {
     super.dispose();
   }
 
-  Future<void> createUser(_email, _password) async {
+  Future<void> createUser(_email, _password, _username) async {
     try {
       _controllers.isLoading(false);
       await _auth
           .createUserWithEmailAndPassword(email: _email, password: _password)
           .then((value) async {
         await _auth.currentUser!.sendEmailVerification();
-        Get.snackbar("Verification", "email verification sent to $_email, click to confirm");
+        Get.snackbar("Verification",
+            "email verification sent to $_email, click to confirm");
         _timer = Timer.periodic(Duration(seconds: 2), (timer) {
           emailVerified();
         });
+        FirebaseFirestore.instance
+            .collection('users')
+            .add
+            ({
+              'uid': value.user!.uid,
+              'email': value.user!.email,
+              'username': _username,
+            });
       }).onError((error, stackTrace) {
         Get.snackbar("Error", error.toString(),
             colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
@@ -73,19 +83,19 @@ class FirebaseForm extends GetxController {
     await _auth.signOut();
   }
 
-  void passwordReset(String email) async{
+  void passwordReset(String email) async {
     print("called");
-    try{
+    try {
       await _auth.sendPasswordResetEmail(email: email).then((value) {
-      Get.offAllNamed(Routes.login);
-      Get.snackbar("Reset","A link have been sent to $email. Click to reset password", duration: Duration(seconds: 5));
-    });
-    }on FirebaseAuthException catch(e){
+        Get.offAllNamed(Routes.login);
+        Get.snackbar(
+            "Reset", "A link have been sent to $email. Click to reset password",
+            duration: Duration(seconds: 5));
+      });
+    } on FirebaseAuthException catch (e) {
       Get.snackbar("title", "$e");
     }
-    
   }
-
 
   Future<void> emailVerified() async {
     user = _auth.currentUser;
@@ -94,7 +104,6 @@ class FirebaseForm extends GetxController {
       _timer!.cancel();
       Get.offAndToNamed(Routes.initial);
       _controllers.isLoggedIn(true);
-      
     }
   }
 }

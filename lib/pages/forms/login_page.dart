@@ -66,7 +66,6 @@ class _LoginPageState extends State<LoginPage> {
                             height: Dimensions.height40,
                           ),
                           SizedBox(
-                            height: Dimensions.height60,
                             child: TextFormField(
                               validator: (input) {
                                 if (input == null || input.isEmpty) {
@@ -122,7 +121,6 @@ class _LoginPageState extends State<LoginPage> {
                             height: Dimensions.height20,
                           ),
                           SizedBox(
-                            height: Dimensions.height60,
                             child: TextFormField(
                               validator: (input) {
                                 if (input == null || input.isEmpty) {

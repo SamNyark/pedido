@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 
 class SellerScreen extends StatelessWidget {
+  const SellerScreen({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class SellerScreen extends StatelessWidget {
                 height: Dimensions.height100,
                 width: Dimensions.width200,
                 color: Colors.blue,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(image: AssetImage("assetName"))
                 ),
               ),

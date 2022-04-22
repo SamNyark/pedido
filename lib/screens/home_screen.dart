@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -76,14 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
             if (!snapshots.hasData) {
-              return Container(
-                  height: Dimensions.height150,
-                  padding: EdgeInsets.symmetric(
-                      vertical: Dimensions.height50,
-                      horizontal: Dimensions.width50),
-                  child: CircularProgressIndicator(
-                    color: AppColors.mainColor,
-                  ));
+              return Container();
             }
 
             return CarouselSlider(

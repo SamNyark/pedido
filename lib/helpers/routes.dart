@@ -25,9 +25,11 @@ class Routes {
         }),
     GetPage(
         name: foodDetails,
+        transition: Transition.fade,
         page: () {
           var index = Get.parameters['index'];
           return FoodDetails(index: int.parse(index!));
+          
         }),
         GetPage(name: signUp, page: () => SignupPage(), transition: Transition.fade, transitionDuration: Duration(milliseconds: 500)),
         GetPage(name: login, page: () => LoginPage()),

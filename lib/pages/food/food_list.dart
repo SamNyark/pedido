@@ -28,7 +28,7 @@ class _FoodListState extends State<FoodList> {
       stream: _stream,
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
         if (!snapshots.hasData) {
-          return CircularProgressIndicator();
+          return Container();
         }
         return ListView.builder(
           shrinkWrap: true,
@@ -53,24 +53,23 @@ class _FoodListState extends State<FoodList> {
                       builder: (context, AsyncSnapshot<String> snapshots) {
                         if (!snapshots.hasData) {
                           return Container(
-                              padding: EdgeInsets.symmetric(horizontal: Dimensions.width30, vertical: Dimensions.height30),
+                              
+                              );
+                        }
+                        return Hero(
+                          tag: "identifier$index",
+                          child: Container(
                               height: Dimensions.height100,
                               width: Dimensions.width100,
-                              child: CircularProgressIndicator(
-                                color: AppColors.mainColor,
-                              ));
-                        }
-                        return Container(
-                            height: Dimensions.height100,
-                            width: Dimensions.width100,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondaryColor,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.height20),
-                                image: DecorationImage(
-                                    image:
-                                        NetworkImage(snapshots.data.toString()),
-                                    fit: BoxFit.cover)));
+                              decoration: BoxDecoration(
+                                color: AppColors.secondaryColor,
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.height20),
+                                  image: DecorationImage(
+                                      image:
+                                          NetworkImage(snapshots.data.toString()),
+                                      fit: BoxFit.cover))),
+                        );
                       },
                     ),
                     Container(
@@ -99,7 +98,7 @@ class _FoodListState extends State<FoodList> {
                               children: [
                                 IconAndText(
                                   icon: Icons.location_on,
-                                  text: "location",
+                                  text: allProducts['location'],
                                   color: AppColors.locationIcon,
                                 ),
                                 SizedBox(

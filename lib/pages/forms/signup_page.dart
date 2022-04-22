@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
@@ -20,7 +22,7 @@ class _SignupPageState extends State<SignupPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? _email, _password, _firstName, _lastName;
+  String? _email, _password, _username;
 
   bool _showPassword = true;
 
@@ -42,12 +44,15 @@ class _SignupPageState extends State<SignupPage> {
                 colors: [Color(0xffe3c08a), Color(0xffffb13d)])),
         child: Column(
           children: [
-            SizedBox(height: Dimensions.height30,),
+            SizedBox(
+              height: Dimensions.height30,
+            ),
             IconButton(
-              padding: EdgeInsets.only(right: Dimensions.width320),
-              onPressed: (){
-              Get.toNamed(Routes.initial);
-            }, icon: Icon(Icons.arrow_back_ios_new)),
+                padding: EdgeInsets.only(right: Dimensions.width320),
+                onPressed: () {
+                  Get.toNamed(Routes.initial);
+                },
+                icon: Icon(Icons.arrow_back_ios_new)),
             SizedBox(
               height: Dimensions.height50,
             ),
@@ -68,7 +73,6 @@ class _SignupPageState extends State<SignupPage> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: Dimensions.height60,
                         child: TextFormField(
                           validator: (input) {
                             if (input == null || input.isEmpty) {
@@ -77,18 +81,17 @@ class _SignupPageState extends State<SignupPage> {
                             return null;
                           },
                           onSaved: (input) {
-                            _firstName = input;
+                            _username = input;
                           },
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.person,
                               color: AppColors.secondaryColor,
                             ),
-                            hintText: "first name",
+                            hintText: "username",
                             hintStyle: TextStyle(
-                              fontSize: Dimensions.height16,
-                              color: AppColors.secondaryColor
-                            ),
+                                fontSize: Dimensions.height16,
+                                color: AppColors.secondaryColor),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.height13),
@@ -120,65 +123,10 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: Dimensions.height10,
+                      const SizedBox(
+                        height: 10,
                       ),
                       SizedBox(
-                        height: Dimensions.height60,
-                        child: TextFormField(
-                          validator: (input) {
-                            if (input == null || input.isEmpty) {
-                              return "Field is required";
-                            }
-                            return null;
-                          },
-                          onSaved: (input) {
-                            _lastName = input;
-                          },
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.person,
-                              color: AppColors.secondaryColor,
-                            ),
-                            hintText: "Last name",
-                            hintStyle: TextStyle(
-                              fontSize: Dimensions.height16,
-                              color: AppColors.secondaryColor
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.height13),
-                                borderSide: BorderSide(
-                                    color: AppColors.secondaryColor,
-                                    style: BorderStyle.solid,
-                                    width: Dimensions.width3)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.height13),
-                                borderSide: BorderSide(
-                                    color: Colors.white,
-                                    style: BorderStyle.solid,
-                                    width: Dimensions.width3)),
-                            errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.height13),
-                                borderSide: BorderSide(
-                                    width: Dimensions.width3,
-                                    style: BorderStyle.solid,
-                                    color: Colors.red.shade400)),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.height13),
-                                borderSide: BorderSide(
-                                    width: Dimensions.width3,
-                                    style: BorderStyle.solid,
-                                    color: Colors.red.shade400)),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10,),
-                      SizedBox(
-                        height: Dimensions.height60,
                         child: TextFormField(
                           validator: (input) {
                             if (input == null || input.isEmpty) {
@@ -200,9 +148,8 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             hintText: "Email",
                             hintStyle: TextStyle(
-                              fontSize: Dimensions.height16,
-                              color: AppColors.secondaryColor
-                            ),
+                                fontSize: Dimensions.height16,
+                                color: AppColors.secondaryColor),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.height13),
@@ -238,7 +185,6 @@ class _SignupPageState extends State<SignupPage> {
                         height: Dimensions.height10,
                       ),
                       SizedBox(
-                        height: Dimensions.height60,
                         child: TextFormField(
                           validator: (input) {
                             if (input == null || input.isEmpty) {
@@ -275,9 +221,8 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             hintText: "Password",
                             hintStyle: TextStyle(
-                              fontSize: Dimensions.height16,
-                              color: AppColors.secondaryColor
-                            ),
+                                fontSize: Dimensions.height16,
+                                color: AppColors.secondaryColor),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.height13),
@@ -286,19 +231,22 @@ class _SignupPageState extends State<SignupPage> {
                                     style: BorderStyle.solid,
                                     width: Dimensions.width3)),
                             focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(Dimensions.height13),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
                                 borderSide: BorderSide(
                                     color: Colors.white,
                                     style: BorderStyle.solid,
                                     width: Dimensions.width3)),
                             errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(Dimensions.height13),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
                                 borderSide: BorderSide(
                                     width: Dimensions.width3,
                                     style: BorderStyle.solid,
                                     color: Colors.red.shade400)),
                             focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(Dimensions.height13),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.height13),
                                 borderSide: BorderSide(
                                     width: Dimensions.width3,
                                     style: BorderStyle.solid,
@@ -318,7 +266,8 @@ class _SignupPageState extends State<SignupPage> {
                                     ? Text(
                                         "Signup",
                                         style: TextStyle(
-                                            fontSize: Dimensions.height18, color: Colors.white),
+                                            fontSize: Dimensions.height18,
+                                            color: Colors.white),
                                       )
                                     : CircularProgressIndicator(
                                         color: AppColors.mainColor,
@@ -327,15 +276,17 @@ class _SignupPageState extends State<SignupPage> {
                                   if (_formKey.currentState!.validate()) {
                                     _formKey.currentState!.save();
                                     formController.createUser(
-                                        _email, _password);
+                                        _email, _password, _username);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
                                     primary: AppColors.secondaryColor,
-                                    padding: EdgeInsets.symmetric(horizontal: Dimensions.width10, vertical: Dimensions.height10),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Dimensions.width10,
+                                        vertical: Dimensions.height10),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(Dimensions.height23))))),
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.height23))))),
                       ),
                       SizedBox(height: Dimensions.height16),
                       Row(
@@ -343,7 +294,9 @@ class _SignupPageState extends State<SignupPage> {
                         children: [
                           Text(
                             "Already have an account?",
-                            style: TextStyle(fontSize: Dimensions.height16, color: Colors.white),
+                            style: TextStyle(
+                                fontSize: Dimensions.height16,
+                                color: Colors.white),
                           ),
                           SizedBox(
                             width: Dimensions.width10,
