@@ -64,7 +64,11 @@ class AccountScreen extends StatelessWidget {
                         children: [
                           ListTile(
                             onTap: (() {
-                              Get.toNamed(Routes.profile);
+                              if (_controllers.isLoggedIn()) {
+                                Get.toNamed(Routes.profile);
+                              }else{
+                                Get.snackbar("title","message", titleText: SmallText(text: "Oops!", size: 18, color: Colors.white,) , messageText: SmallText(text: "You must Sign in first", color: Colors.white,), colorText: Colors.white, backgroundColor: Colors.black54);
+                              }
                             }),
                             leading: Icon(Icons.person),
                             title: Text("Profile"),

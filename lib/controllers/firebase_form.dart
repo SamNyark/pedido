@@ -45,14 +45,10 @@ class FirebaseForm extends GetxController {
         _timer = Timer.periodic(Duration(seconds: 2), (timer) {
           emailVerified();
         });
-        FirebaseFirestore.instance
-            .collection('users')
-            .add
-            ({
-              'uid': value.user!.uid,
-              'email': value.user!.email,
-              'username': _username,
-            });
+        FirebaseFirestore.instance.collection('users').doc(_auth.currentUser!.uid).set({
+          'email': value.user!.email,
+          'username': _username,
+        });
       }).onError((error, stackTrace) {
         Get.snackbar("Error", error.toString(),
             colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
@@ -68,10 +64,11 @@ class FirebaseForm extends GetxController {
       await _auth
           .signInWithEmailAndPassword(email: _email, password: _password)
           .then((value) {
-        Get.offAllNamed(Routes.initial);
+        Get.offNamed(Routes.initial);
         _controllers.isLoggedIn(true);
       }).onError((error, stackTrace) {
-        Get.snackbar("Error", error.toString(),
+        var str = error.toString().substring(error.toString().indexOf('T'));
+        Get.snackbar("Error", str,
             colorText: Colors.white, backgroundColor: const Color(0xfffa3116));
       });
     } finally {
@@ -87,7 +84,7 @@ class FirebaseForm extends GetxController {
     print("called");
     try {
       await _auth.sendPasswordResetEmail(email: email).then((value) {
-        Get.offAllNamed(Routes.login);
+        Get.offNamed(Routes.login);
         Get.snackbar(
             "Reset", "A link have been sent to $email. Click to reset password",
             duration: Duration(seconds: 5));
@@ -103,7 +100,7 @@ class FirebaseForm extends GetxController {
     if (user!.emailVerified) {
       _timer!.cancel();
       Get.offAndToNamed(Routes.initial);
-      _controllers.isLoggedIn(true); 
+      _controllers.isLoggedIn(true);
     }
   }
 }
