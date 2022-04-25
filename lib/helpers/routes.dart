@@ -23,7 +23,7 @@ class Routes {
     GetPage(
         name: initial,
         page: () {
-          return HomePage();
+          return const HomePage();
         }),
     GetPage(
         name: foodDetails,
@@ -34,12 +34,12 @@ class Routes {
         }),
     GetPage(
         name: signUp,
-        page: () => SignupPage(),
+        page: () => const SignupPage(),
         transition: Transition.fade,
-        transitionDuration: Duration(milliseconds: 500)),
-    GetPage(name: login, page: () => LoginPage()),
+        transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(name: login, page: () => const LoginPage()),
     GetPage(name: forgetPassword, page: () => ResetPassword()),
     GetPage(name: account, page: () => AccountScreen()),
-    GetPage(name: profile, page: () => Profile(), transition: Transition.fade, transitionDuration: Duration(milliseconds: 500))
+    GetPage(name: profile, page: () => Profile(), transition: Transition.fade, transitionDuration: const Duration(milliseconds: 500))
   ];
 }

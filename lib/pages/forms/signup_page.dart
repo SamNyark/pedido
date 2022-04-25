@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pedido/controllers/firebase_form.dart';
@@ -7,7 +5,6 @@ import 'package:pedido/controllers/controllers.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
 import 'package:pedido/helpers/routes.dart';
-import 'package:pedido/pages/forms/login_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);

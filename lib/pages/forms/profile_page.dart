@@ -83,7 +83,7 @@ class Profile extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.circular(Dimensions.height10)),
                         child: ListTile(
-                          title: SmallText(text: "Username", color: Colors.blueGrey,),
+                          title: const SmallText(text: "Username", color: Colors.blueGrey,),
                           subtitle: SmallText(
                               text: snapshots.data!.get('username')),
                         ),
@@ -97,7 +97,7 @@ class Profile extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.height10)),
                           child: ListTile(
-                            title: SmallText(text: "email", color: Colors.blueGrey,),
+                            title: const SmallText(text: "email", color: Colors.blueGrey,),
                             subtitle: SmallText(
                               text: snapshots.data!.get('email'),
                             ),

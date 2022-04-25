@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 class CartController extends GetxController {
   int quantity = 1;
 
+  Map<String, dynamic> items = {};
+
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
       quantity += 1;

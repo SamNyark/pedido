@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +6,14 @@ import 'package:get/get.dart';
 import 'package:pedido/controllers/cart.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
+import 'package:pedido/model/cart.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
 import 'package:pedido/widgets/details_collapse.dart';
 import 'package:pedido/widgets/icon_and_text.dart';
 
 class FoodDetails extends StatefulWidget {
   final int index;
-  FoodDetails({Key? key, required this.index}) : super(key: key);
+  const FoodDetails({Key? key, required this.index}) : super(key: key);
 
   @override
   State<FoodDetails> createState() => _FoodDetailsState();
@@ -37,13 +37,14 @@ class _FoodDetailsState extends State<FoodDetails> {
 
   @override
   Widget build(BuildContext context) {
+    cartController.initQuantity();
     return SafeArea(
       child: StreamBuilder(
           stream: _stream,
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
             Map<String, dynamic> product = snapshots.data!.docs[widget.index]
                 .data() as Map<String, dynamic>;
-            cartController.initQuantity();
+            DocumentSnapshot reff = snapshots.data!.docs[widget.index];
             return Scaffold(
               body: Stack(
                 children: [
@@ -291,16 +292,28 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         color: AppColors.mainColor,
                                         borderRadius: BorderRadius.circular(
                                             Dimensions.height30)),
-                                    child: const Center(
-                                      child: Text(
-                                        "confirm",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
+                                    child: TextButton(
+                                        onPressed: (() {
+                                          cartController.items.putIfAbsent(reff.id,
+                                              () {
+                                                //TODO
+                                            return CartModel(
+                                              title: product['title'],
+                                              price: product['price'],
+                                              isExit: true,
+                                              time: DateTime.now().toString(),
+                                              quantity: cartController.quantity
+                                            );
+                                          });
+                                        }),
+                                        child: const Text(
+                                          "confirm",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                          ),
+                                        )),
                                   )),
                               Positioned(
                                 left: Dimensions.width20,
@@ -313,7 +326,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         onPressed: () {
                                           cartController.setQuantity(false);
                                         },
-                                        icon: Icon(Icons.remove)),
+                                        icon: const Icon(Icons.remove)),
                                     SizedBox(
                                       width: Dimensions.width5,
                                     ),
@@ -333,14 +346,14 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         onPressed: () {
                                           cartController.setQuantity(true);
                                         },
-                                        icon: Icon(Icons.add)),
+                                        icon: const Icon(Icons.add)),
                                   ],
                                 ),
                               ),
                               Positioned(
                                   left: Dimensions.width10,
                                   bottom: Dimensions.height120,
-                                  child: SmallText(
+                                  child: const SmallText(
                                     text: "Amount you want to buy",
                                     size: 13,
                                   ))

@@ -42,7 +42,7 @@ class FirebaseForm extends GetxController {
         await _auth.currentUser!.sendEmailVerification();
         Get.snackbar("Verification",
             "email verification sent to $_email, click to confirm");
-        _timer = Timer.periodic(Duration(seconds: 2), (timer) {
+        _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
           emailVerified();
         });
         FirebaseFirestore.instance.collection('users').doc(_auth.currentUser!.uid).set({
@@ -81,13 +81,12 @@ class FirebaseForm extends GetxController {
   }
 
   void passwordReset(String email) async {
-    print("called");
     try {
       await _auth.sendPasswordResetEmail(email: email).then((value) {
         Get.offNamed(Routes.login);
         Get.snackbar(
             "Reset", "A link have been sent to $email. Click to reset password",
-            duration: Duration(seconds: 5));
+            duration: const Duration(seconds: 5));
       });
     } on FirebaseAuthException catch (e) {
       Get.snackbar("title", "$e");
