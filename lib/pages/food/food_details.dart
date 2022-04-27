@@ -294,16 +294,30 @@ class _FoodDetailsState extends State<FoodDetails> {
                                             Dimensions.height30)),
                                     child: TextButton(
                                         onPressed: (() {
-                                          cartController.items.putIfAbsent(reff.id,
-                                              () {
-                                                //TODO
+                                          if (cartController.items.containsKey(
+                                            reff.id,
+                                          )) {
+                                            cartController.items.update(reff.id,
+                                                (value) {
+                                              return CartModel(
+                                                  title: value.title,
+                                                  price: value.price,
+                                                  isExit: true,
+                                                  time:
+                                                      DateTime.now().toString(),
+                                                  quantity: value.quantity +
+                                                      cartController.quantity);
+                                            });
+                                          }
+                                          cartController.items
+                                              .putIfAbsent(reff.id, () {
                                             return CartModel(
-                                              title: product['title'],
-                                              price: product['price'],
-                                              isExit: true,
-                                              time: DateTime.now().toString(),
-                                              quantity: cartController.quantity
-                                            );
+                                                title: product['title'],
+                                                price: product['price'],
+                                                isExit: true,
+                                                time: DateTime.now().toString(),
+                                                quantity:
+                                                    cartController.quantity);
                                           });
                                         }),
                                         child: const Text(
