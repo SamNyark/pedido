@@ -5,7 +5,7 @@ class CartModel {
   int? quantity;
   int? price;
   String? time;
-  bool? isExit;
+  bool? isExits;
 
-  CartModel({this.title, this.id, this.image, this.quantity, this.price, this.isExit, this.time});
+  CartModel({this.title, this.id, this.image, this.quantity, this.price, this.isExits, this.time});
 }

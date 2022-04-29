@@ -302,7 +302,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                               return CartModel(
                                                   title: value.title,
                                                   price: value.price,
-                                                  isExit: true,
+                                                  isExits: true,
                                                   time:
                                                       DateTime.now().toString(),
                                                   quantity: value.quantity +
@@ -314,7 +314,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                             return CartModel(
                                                 title: product['title'],
                                                 price: product['price'],
-                                                isExit: true,
+                                                isExits: true,
                                                 time: DateTime.now().toString(),
                                                 quantity:
                                                     cartController.quantity);
@@ -344,15 +344,14 @@ class _FoodDetailsState extends State<FoodDetails> {
                                     SizedBox(
                                       width: Dimensions.width5,
                                     ),
-                                    GetBuilder<CartController>(
-                                      builder: (_) {
-                                        return SmallText(
-                                          text: cartController.quantity
-                                              .toString(),
-                                          size: 18,
-                                        );
-                                      },
-                                    ),
+                                    GetBuilder<CartController>(builder: (_) {
+                                      return SmallText(
+                                        text: cartController
+                                            .items.containsKey(reff.id) ? cartController
+                                            .items[reff.id].quantity.toString() : cartController.quantity.toString(),
+                                        size: 18,
+                                      );
+                                    }),
                                     SizedBox(
                                       width: Dimensions.width5,
                                     ),
