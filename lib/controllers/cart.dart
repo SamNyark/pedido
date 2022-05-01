@@ -24,4 +24,14 @@ class CartController extends GetxController {
   void initQuantity() {
     quantity = 1;
   }
+
+  int totalQuantityf() {
+    int totalQuantity = 0;
+    items.entries.forEach(
+      (element) {
+        totalQuantity += (element.value.quantity) as int;
+      },
+    );
+    return totalQuantity;
+  }
 }

@@ -319,6 +319,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                                 quantity:
                                                     cartController.quantity);
                                           });
+                                          print(cartController.totalQuantityf());
                                         }),
                                         child: const Text(
                                           "confirm",
@@ -346,9 +347,13 @@ class _FoodDetailsState extends State<FoodDetails> {
                                     ),
                                     GetBuilder<CartController>(builder: (_) {
                                       return SmallText(
-                                        text: cartController
-                                            .items.containsKey(reff.id) ? cartController
-                                            .items[reff.id].quantity.toString() : cartController.quantity.toString(),
+                                        text: cartController.items
+                                                .containsKey(reff.id)
+                                            ? cartController
+                                                .items[reff.id].quantity
+                                                .toString()
+                                            : cartController.quantity
+                                                .toString(),
                                         size: 18,
                                       );
                                     }),
