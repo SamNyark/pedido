@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
+import 'package:pedido/model/cart.dart';
 
 class CartController extends GetxController {
   int quantity = 1;
+  int totalQuantity = 0;
 
-  Map<String, dynamic> items = {};
+  Map<String, CartModel> items = {};
 
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
@@ -25,13 +27,30 @@ class CartController extends GetxController {
     quantity = 1;
   }
 
-  int totalQuantityf() {
-    int totalQuantity = 0;
+  void cartChange(int index, bool value) {
+    if(value){
+     getItems[index].quantity = getItems[index].quantity! + 1;
+    }else{
+      getItems[index].quantity = checkQuantity(getItems[index].quantity!- 1);
+    }
+    update();
+  }
+
+  void totalQuantityf() {
+    var value = 0;
     items.entries.forEach(
       (element) {
-        totalQuantity += (element.value.quantity) as int;
+        value += (element.value.quantity) as int;
       },
     );
-    return totalQuantity;
+    totalQuantity = value;
+    value = 0;
+    update();
+  }
+
+  List<CartModel> get getItems {
+    return items.entries.map((e) {
+      return e.value;
+    }).toList();
   }
 }

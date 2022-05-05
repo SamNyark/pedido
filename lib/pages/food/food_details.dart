@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:pedido/controllers/cart.dart';
 import 'package:pedido/helpers/colors.dart';
 import 'package:pedido/helpers/dimensions.dart';
+import 'package:pedido/helpers/routes.dart';
 import 'package:pedido/model/cart.dart';
 import 'package:pedido/widgets/big_text_and_small_text.dart';
 import 'package:pedido/widgets/details_collapse.dart';
@@ -91,8 +92,9 @@ class _FoodDetailsState extends State<FoodDetails> {
                                   Get.back();
                                 },
                                 icon: Icon(
-                                  Icons.arrow_back_ios_new,
+                                  Icons.arrow_back,
                                   size: Dimensions.height20,
+                                  color: AppColors.secondaryColor,
                                 ),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: Dimensions.width3,
@@ -105,15 +107,36 @@ class _FoodDetailsState extends State<FoodDetails> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(
                                       Dimensions.height20)),
-                              child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.shopping_cart,
-                                  size: Dimensions.height20,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: Dimensions.width3,
-                                    vertical: Dimensions.height3),
+                              child: Stack(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Get.toNamed(Routes.cart);
+                                    },
+                                    icon: Icon(
+                                      Icons.shopping_cart,
+                                      size: Dimensions.height20,
+                                      color: AppColors.secondaryColor,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: Dimensions.width3,
+                                        vertical: Dimensions.height3),
+                                  ),
+                                  Positioned(
+                                    top: -5,
+                                    right: 0,
+                                    child: GetBuilder<CartController>(
+                                      builder: (_) {
+                                        return SmallText(
+                                        text: cartController.totalQuantity
+                                            .toString(),
+                                        size: 20,
+                                      );
+                                      },
+                                      
+                                    ),
+                                  ),
+                                ],
                               )),
                         ],
                       )),
@@ -305,7 +328,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                                   isExits: true,
                                                   time:
                                                       DateTime.now().toString(),
-                                                  quantity: value.quantity +
+                                                  quantity: value.quantity !+
                                                       cartController.quantity);
                                             });
                                           }
@@ -313,13 +336,15 @@ class _FoodDetailsState extends State<FoodDetails> {
                                               .putIfAbsent(reff.id, () {
                                             return CartModel(
                                                 title: product['title'],
+                                                index: reff.id,
                                                 price: product['price'],
                                                 isExits: true,
                                                 time: DateTime.now().toString(),
                                                 quantity:
                                                     cartController.quantity);
                                           });
-                                          print(cartController.totalQuantityf());
+                                          cartController.totalQuantityf();
+                                          Get.snackbar("", "Item added");
                                         }),
                                         child: const Text(
                                           "confirm",
@@ -350,7 +375,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                                         text: cartController.items
                                                 .containsKey(reff.id)
                                             ? cartController
-                                                .items[reff.id].quantity
+                                                .items[reff.id]!.quantity
                                                 .toString()
                                             : cartController.quantity
                                                 .toString(),

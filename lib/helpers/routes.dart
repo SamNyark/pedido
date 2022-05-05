@@ -7,6 +7,7 @@ import 'package:pedido/pages/forms/signup_page.dart';
 import 'package:pedido/pages/home_page.dart';
 
 import '../screens/account_screen.dart';
+import '../screens/cart_screen.dart';
 
 class Routes {
   static String initial = "/";
@@ -16,6 +17,7 @@ class Routes {
   static String forgetPassword = "/forget-password";
   static String account = "/account";
   static String profile = "/profile";
+  static String cart = "/cart";
 
   static String foodDetailsPage(int index) => "$foodDetails?index=$index";
 
@@ -40,6 +42,11 @@ class Routes {
     GetPage(name: login, page: () => const LoginPage()),
     GetPage(name: forgetPassword, page: () => ResetPassword()),
     GetPage(name: account, page: () => AccountScreen()),
-    GetPage(name: profile, page: () => Profile(), transition: Transition.fade, transitionDuration: const Duration(milliseconds: 500))
+    GetPage(
+        name: profile,
+        page: () => Profile(),
+        transition: Transition.fade,
+        transitionDuration: const Duration(milliseconds: 500)),
+        GetPage(name: cart, page: () => Cart())
   ];
 }

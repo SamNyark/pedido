@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
    int _currentIndex = 0;
-  final tabView = [const HomeScreen(), const SellerScreen(), const Cart(), AccountScreen()];
+  final tabView = [const HomeScreen(), const SellerScreen(), Cart(), AccountScreen()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
