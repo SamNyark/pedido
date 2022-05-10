@@ -28,10 +28,12 @@ class CartController extends GetxController {
   }
 
   void cartChange(int index, bool value) {
-    if(value){
-     getItems[index].quantity = getItems[index].quantity! + 1;
-    }else{
-      getItems[index].quantity = checkQuantity(getItems[index].quantity!- 1);
+    if (value) {
+      getItems[index].quantity = getItems[index].quantity! + 1;
+      totalQuantityf();
+    } else {
+      getItems[index].quantity = checkQuantity(getItems[index].quantity! - 1);
+      totalQuantityf();
     }
     update();
   }

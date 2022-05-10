@@ -15,15 +15,26 @@ class Cart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (_cartController.totalQuantity == 0) {
-      return SafeArea(child: Scaffold(
-        body: Container(
-          height: Dimensions.height100*7,
-          width: Dimensions.width100*3,
-          decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage("assets/images/empty-cart.png"), fit: BoxFit.cover)
-          ),
+      return Container(
+        alignment: Alignment.center,
+        color: const Color(0xfff2f2f2),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(
+              Icons.no_backpack,
+              size: 60,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Oops! NO item in cart",
+              style: TextStyle(fontFamily: "Lora", fontSize: 20),
+            ),
+          ],
         ),
-      ));
+      );
     } else {
       return SafeArea(
         child: Scaffold(
@@ -116,6 +127,8 @@ class Cart extends StatelessWidget {
                                           .toString()),
                                   IconButton(
                                     onPressed: () {
+                                      // _cartController.getItems[index].quantity =
+                                      //     0;
                                       _cartController.items.remove(
                                           _cartController
                                               .getItems[index].index);
