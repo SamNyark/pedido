@@ -10,7 +10,7 @@ import '../helpers/routes.dart';
 class Cart extends StatelessWidget {
   Cart({Key? key}) : super(key: key);
 
-  CartController _cartController = Get.find();
+  final CartController _cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class Cart extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.width3,
                           vertical: Dimensions.height3),
-                      icon: Icon(Icons.arrow_back),
+                      icon: const Icon(Icons.arrow_back),
                       iconSize: 25,
                       color: Colors.white,
                     )),
@@ -78,7 +78,7 @@ class Cart extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: Dimensions.width2,
                           vertical: Dimensions.height4),
-                      icon: Icon(Icons.home),
+                      icon: const Icon(Icons.home),
                       iconSize: 25,
                       color: Colors.white,
                     )),
@@ -133,7 +133,7 @@ class Cart extends StatelessWidget {
                                           _cartController
                                               .getItems[index].index);
                                     },
-                                    icon: Icon(Icons.delete),
+                                    icon: const Icon(Icons.delete),
                                     color: AppColors.secondaryColor,
                                   )
                                 ],

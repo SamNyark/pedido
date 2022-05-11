@@ -48,6 +48,7 @@ class FirebaseForm extends GetxController {
         FirebaseFirestore.instance.collection('users').doc(_auth.currentUser!.uid).set({
           'email': value.user!.email,
           'username': _username,
+          'userType': "user"
         });
       }).onError((error, stackTrace) {
         Get.snackbar("Error", error.toString(),
