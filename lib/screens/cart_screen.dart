@@ -16,11 +16,13 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     if (_cartController.totalQuantity == 0) {
       return SafeArea(child: Scaffold(
-        body: Container(
-          height: Dimensions.height100*7,
-          width: Dimensions.width100*3,
-          decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage("assets/images/empty-cart.png"), fit: BoxFit.cover)
+        body: Center(
+          child: Container(
+            height: Dimensions.height100*5,
+            width: Dimensions.width100*2.5,
+            decoration: const BoxDecoration(
+              image: DecorationImage(image: AssetImage("assets/images/empty-cart.png"), fit: BoxFit.cover)
+            ),
           ),
         ),
       ));
