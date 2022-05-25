@@ -47,6 +47,6 @@ class Routes {
         page: () => Profile(),
         transition: Transition.fade,
         transitionDuration: const Duration(milliseconds: 500)),
-        GetPage(name: cart, page: () => Cart())
+    GetPage(name: cart, page: () => Cart())
   ];
 }
